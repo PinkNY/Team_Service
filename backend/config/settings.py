@@ -25,12 +25,13 @@ SECRET_KEY = 'django-insecure--3m5ujzym14++^e#u_3q^j2cln4^0cze9guf3_)ssg^#sz=cq-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'api',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+# 로그인 후 리디렉션할 URL
+LOGIN_REDIRECT_URL = '/'
+
+# 로그아웃 후 리디렉션할 URL
+LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,8 +82,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'user_db',      # 데이터베이스 이름
+        'USER': 'root',      # 데이터베이스 사용자 이름
+        'PASSWORD': '1234',       # 사용자 비밀번호
+        'HOST': '192.168.0.79',               # 데이터베이스 서버의 호스트
+        'PORT': '3306',                    # MySQL 포트 (기본값은 3306)
     }
 }
 
