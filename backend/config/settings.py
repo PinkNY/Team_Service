@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
+    'rest_framework',
     'api',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,7 +48,13 @@ LOGIN_REDIRECT_URL = '/'
 # 로그아웃 후 리디렉션할 URL
 LOGOUT_REDIRECT_URL = '/'
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React 앱이 실행되는 주소
+    "http://127.0.0.1:3000",
+]
+
 MIDDLEWARE = [
+     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -73,21 +81,28 @@ TEMPLATES = [
         },
     },
 ]
+AUTH_USER_MODEL = 'api.RegularUser'
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'user_db',      # 데이터베이스 이름
+#         'USER': 'root',      # 데이터베이스 사용자 이름
+#         'PASSWORD': '1234',       # 사용자 비밀번호
+#         'HOST': '192.168.0.79',               # 데이터베이스 서버의 호스트
+#         'PORT': '3306',                    # MySQL 포트 (기본값은 3306)
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'user_db',      # 데이터베이스 이름
-        'USER': 'root',      # 데이터베이스 사용자 이름
-        'PASSWORD': '1234',       # 사용자 비밀번호
-        'HOST': '192.168.0.79',               # 데이터베이스 서버의 호스트
-        'PORT': '3306',                    # MySQL 포트 (기본값은 3306)
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # 프로젝트 디렉토리에 db.sqlite3 파일이 생성됩니다.
     }
 }
 
@@ -132,3 +147,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# REST_FRAMEWORK = { #JWT 인증을 사용하기 위한 설정
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ),
+# }
