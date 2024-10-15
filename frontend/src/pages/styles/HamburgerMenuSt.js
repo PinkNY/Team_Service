@@ -30,7 +30,7 @@ export const MenuHeader = styled.div`
 `;
 
 export const Menu = styled.div`
-  position: fixed;
+  position: absolute;
   top: 110px;
   // right: 0;
   right: 200px;
@@ -51,6 +51,16 @@ export const Menu = styled.div`
     width: 100%;
     height: 100vh;
     right: 0;
+  }
+  
+  @media(min-width: 601px) and (max-width: 799px) {
+    width: 100%;
+    right: 0;
+  }
+
+  @media(min-width: 800px) and (max-width: 1350px) {
+    right: 0;
+    width: 30%;
   }
 `;
 
