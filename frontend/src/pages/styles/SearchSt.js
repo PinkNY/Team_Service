@@ -38,8 +38,4 @@ export const SearchButton = styled.button`
   font-size: 40px;
   border: none;
   cursor: pointer;
-
-  &:hover {
-    background-color: #0056b3;
-  }
 `;

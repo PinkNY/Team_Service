@@ -11,6 +11,6 @@ export const BotCon = styled.div`
 `;
 
 export const BotText = styled.p`
-  font-size: 10px;
+  font-size: 20px;
   font-weight: bold;
 `;

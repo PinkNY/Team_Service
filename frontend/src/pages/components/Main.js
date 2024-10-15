@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { MainContainer } from '../styles/MainSt';
 import SearchBar from './Search';
 import DoubleCont from './WrapCont';
