@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { FaRegUser, FaLock, FaFemale, FaMale, FaEnvelope } from 'react-icons/fa';
+import { FaRegUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { FaMapLocationDot, FaIdCardClip } from 'react-icons/fa6';
 import { SlCalender } from "react-icons/sl";
 
@@ -41,17 +41,6 @@ const IndividualSignup = () => {
       gender,
     });
   };
-
-  const [fieldErrors, setFieldErrors] = useState({
-    name: '',
-    username: '',
-    password: '',
-    confirmPassword: '',
-    email: '',
-    location: '',
-    gender: '',
-    birthDate: '',
-  });
 
   const handleSubmit = (e) => {
     e.preventDefault();

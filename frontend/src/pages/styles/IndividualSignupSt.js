@@ -60,8 +60,9 @@ export const InputField = styled.input`
   padding: 10px;
   font-size: 25px;
   margin: 5px;
+  border: ${(props) => (props.hasError ? '2px solid red' : '3px solid black' )};
 
-  border: 3px solid black;
+  // border: 3px solid black;
   border-radius: 15px;
 `;
 
@@ -80,11 +81,6 @@ export const SignupButton = styled.button`
 
   border: 3px solid black;
   border-radius: 15px;
-`;
-
-export const ErrorMessage = styled.p`
-  color: red;
-  margin: 10px 0;
 `;
 
 export const CalendarContainer = styled.div`
@@ -177,4 +173,14 @@ export const GenderButton = styled.button`
   &:hover {
     background-color: #333;
   }
+`;
+
+export const ErrorContainer = styled.div`
+  display: flex;
+  margin-top: 5px;
+`;
+
+export const ErrorMessage = styled.p`
+  color: red;
+  margin: 10px 0;
 `;

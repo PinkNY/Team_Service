@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { FaRegUser, FaLock, FaEnvelope } from 'react-icons/fa';
+import { FaMapLocationDot, FaIdCardClip } from 'react-icons/fa6';
+
 import { FormContainer, Input, Button } from '../styles/BusinessSignupSt';
 
 const BusinessSignup = () => {
