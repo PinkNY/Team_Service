@@ -42,6 +42,7 @@ export const Menu = styled.div`
   align-items: center;
   z-index: 10;
   color: white;
+  padding-top: 10px;
   
   border: 3px solid white;
 
@@ -74,26 +75,15 @@ export const MenuBox = styled.div`
   background-color: transparent;
   color: white;
   font-size: 25px;
+  margin-top: 30px;
 
-  border: 3px solid white;
+  // border: 3px solid white;
 
   ${media.mobile} {
     font-size: 20px;
     margin-top: 50px;
     padding-top: 20px;
     justify-content: flex-start;
-  }
-`;
-
-export const PushRight = styled.div`
-  display: flex;
-  right: 10px;
-  font-size: 70px;
-  cursor: pointer;
-  color: white;  
-
-  ${media.mobile} {
-    font-size: 35px;
   }
 `;
 
@@ -107,5 +97,60 @@ export const Alarmcon = styled.div`
 
   ${media.mobile} {
     font-size: 30px;
+  }
+`;
+
+export const UserInfo = styled.div`
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid white;
+  color: white;
+
+  h2 {
+    font-size: 24px;
+    margin: 0;
+  }
+
+  p {
+    font-size: 20px;
+    margin: 5px 0;
+  }
+
+  ${media.mobile} {
+    h2 {
+      font-size: 20px;
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+`;
+
+export const ProgressBar = styled.div`
+  width: 100%;
+  height: 8px;
+  background-color: grey;
+  border-radius: 4px;
+  margin: 10px 0;
+
+  .progress {
+    height: 100%;
+    background-color: red;
+    border-radius: 4px;
+  }
+
+  ${media.mobile} {
+    height: 6px;
+  }
+`;
+
+export const ProgressText = styled.div`
+  font-size: 40px;
+  color: white;
+  margin-bottom: 5px;
+
+  ${media.mobile} {
+    font-size: 14px;
   }
 `;
