@@ -19,7 +19,6 @@ export const LoginContainer = styled.div`
   justify-content: center;
   width: 80vw;
   background-color: white;
-  margin-top: 100px;
 
   // border: 3px solid black;
   // border-radius: 15px;
