@@ -32,3 +32,14 @@ export const Button = styled.button`
   border: 3px solid black;
   border-radius: 15px;
 `;
+
+export const InputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  svg {
+    margin-right: 10px;
+    color: #888;    // 아이콘 색상
+  }
+`;

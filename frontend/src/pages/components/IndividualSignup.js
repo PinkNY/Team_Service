@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
 
 import { FaRegUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { FaMapLocationDot, FaIdCardClip } from 'react-icons/fa6';
@@ -33,6 +34,12 @@ const IndividualSignup = () => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
+    setFormData({
+      ...formData,
+      birthYear: date.getFullYear(),
+      birthMonth: date.getMonth() + 1,
+      birthDay: date.getDate(),
+    });
   }
 
   const handleGenderSelect = (gender) => {
@@ -42,7 +49,7 @@ const IndividualSignup = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, username, password, confirmPassword, email, gender, birthYear, birthMonth, birthDay } = formData;
 
@@ -77,9 +84,26 @@ const IndividualSignup = () => {
     }
     setError('');
 
-    //  회원가입 처리 로직 추가 (예: 백엔드 연동)
-    console.log('회원가입 완료', formData);
-    navigate('/main');  //  회원가입 성공 후 메인 페이지로 이동
+    try {
+      // 회원가입 API 요청
+      const response = await axios.post('/api/signup', {
+        name,
+        username,
+        password,
+        email,
+        location: formData.location,
+        gender,
+        birth_date: `${birthYear}-${birthMonth}-${birthDay}`,
+      });
+
+      if (response.status === 201) {
+        console.log('회원가입 완료', response.data);
+        navigate('/main');  // 회원가입 성공 후 메인 페이지로 이동
+      }
+    } catch (err) {
+      console.error(err);
+      setError('회원가입 중 오류가 발생했습니다. 다시 시도해주세요.');
+    }
   };
 
   return (
