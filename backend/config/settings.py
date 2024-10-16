@@ -83,12 +83,28 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'user_db',      # 데이터베이스 이름
-        'USER': 'root',      # 데이터베이스 사용자 이름
-        'PASSWORD': '1234',       # 사용자 비밀번호
-        'HOST': '192.168.0.79',               # 데이터베이스 서버의 호스트
-        'PORT': '3306',                    # MySQL 포트 (기본값은 3306)
-    }
+        'NAME': 'default_db',
+        'USER': 'your_username',
+        'PASSWORD': 'your_password',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    },
+    'user_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'user_db',
+        'USER': 'your_username',
+        'PASSWORD': 'your_password',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    },
+    'company_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'company_db',
+        'USER': 'your_username',
+        'PASSWORD': 'your_password',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    },
 }
 
 
