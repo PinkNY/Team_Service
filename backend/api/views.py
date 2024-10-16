@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 from .models import RegularUser, BusinessUser
 from .serializers import RegularUserSerializer, BusinessUserSerializer, LoginSerializer
 
+
 class RegularUserCreate(generics.CreateAPIView): #일반사용자 뷰
     queryset = RegularUser.objects.all()
     serializer_class = RegularUserSerializer

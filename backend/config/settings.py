@@ -101,9 +101,32 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',  # 프로젝트 디렉토리에 db.sqlite3 파일이 생성됩니다.
-    }
+
+
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'default_db',
+        'USER': 'your_username',
+        'PASSWORD': 'your_password',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    },
+    'user_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'user_db',
+        'USER': 'your_username',
+        'PASSWORD': 'your_password',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    },
+    'company_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'company_db',
+        'USER': 'your_username',
+        'PASSWORD': 'your_password',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    },
+
 }
 
 

@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password
 
+
 class RegularUser(AbstractUser): # 일반 사용자 모델
     name = models.CharField(max_length=100)
     birthdate = models.DateField(null=True, blank=True)
