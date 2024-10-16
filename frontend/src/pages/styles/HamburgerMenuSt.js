@@ -35,14 +35,13 @@ export const Menu = styled.div`
   // right: 0;
   right: 200px;
   width: 20%;
-  height: 100vh;
+  height: 80vh;
   background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 10;
   color: white;
-  padding-top: 10px;
   
   border: 3px solid white;
 
@@ -67,15 +66,14 @@ export const Menu = styled.div`
 
 export const MenuBox = styled.div`
   width: 100%;
-  height: 700px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: transparent;
   color: white;
-  font-size: 25px;
-  margin-top: 30px;
+  font-size: 20px;
 
   // border: 3px solid white;
 
@@ -104,7 +102,7 @@ export const UserInfo = styled.div`
   width: 100%;
   padding: 20px;
   text-align: center;
-  border-bottom: 1px solid white;
+  border-bottom: 3px solid white;
   color: white;
 
   h2 {
@@ -113,7 +111,7 @@ export const UserInfo = styled.div`
   }
 
   p {
-    font-size: 20px;
+    font-size: 10px;
     margin: 5px 0;
   }
 
@@ -141,7 +139,7 @@ export const ProgressBar = styled.div`
   }
 
   ${media.mobile} {
-    height: 6px;
+    height: 15px;
   }
 `;
 
@@ -151,6 +149,6 @@ export const ProgressText = styled.div`
   margin-bottom: 5px;
 
   ${media.mobile} {
-    font-size: 14px;
+    font-size: 30px;
   }
 `;

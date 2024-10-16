@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import { FaRegUser, FaLock, FaEnvelope } from 'react-icons/fa';
-import { FaMapLocationDot } from 'react-icons/fa6';
-// import { SlCalender } from "react-icons/sl";
+import 'react-datepicker/dist/react-datepicker.css';
 
-import { SignupContainer, InputField, SignupButton, ErrorMessage, RadioGroup, RadioButton, Label, InputWrapper, CalendarContainer, ConfirmButton, SubContainer, LargeContainer, ContainerWrapper } from '../styles/IndividualSignupSt';
+import { FaRegUser, FaLock, FaFemale, FaMale, FaEnvelope } from 'react-icons/fa';
+import { FaMapLocationDot, FaIdCardClip } from 'react-icons/fa6';
+import { SlCalender } from "react-icons/sl";
+
+import { SignupContainer, InputField, SignupButton, ErrorMessage, InputWrapper, CalendarContainer, SubContainer, LargeContainer, ContainerWrapper, DatePickerStyle, GenderButton, GenderContainer, GenderBox } from '../styles/IndividualSignupSt';
 
 const IndividualSignup = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +14,7 @@ const IndividualSignup = () => {
     username: '',
     password: '',
     confirmPassword: '',
+    email: '',
     location: '',
     gender: '',
     birthYear: '',
@@ -34,20 +35,27 @@ const IndividualSignup = () => {
     setSelectedDate(date);
   }
 
-  const handleDateConfirm = () => {
-    if (selectedDate) {
-      setFormData({
-        ...formData,
-        birthYear: selectedDate.getFullYear(),
-        birthMonth: selectedDate.getMonth() + 1,
-        birthDay: selectedDate.getDate(),
-      });
-    }
+  const handleGenderSelect = (gender) => {
+    setFormData({
+      ...formData,
+      gender,
+    });
   };
+
+  const [fieldErrors, setFieldErrors] = useState({
+    name: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
+    email: '',
+    location: '',
+    gender: '',
+    birthDate: '',
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, username, password, confirmPassword, gender, birthYear, birthMonth, birthDay } = formData;
+    const { name, username, password, confirmPassword, email, gender, birthYear, birthMonth, birthDay } = formData;
 
     // 간단한 유효성 검사
     if (!/^[가-힣]+$/.test(name)) {
@@ -64,6 +72,10 @@ const IndividualSignup = () => {
     }
     if (password !== confirmPassword) {
       setError('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+      return;
+    }
+    if (!email) {
+      setError('이메일을 다시 한 번 확인해주세요.');
       return;
     }
     if (!gender) {
@@ -83,12 +95,12 @@ const IndividualSignup = () => {
 
   return (
     <LargeContainer>
-      <h2>개인 회원가입</h2>
+      <h2 style={{ fontSize: '50px'}}>회원가입</h2>
       <ContainerWrapper>
         <SignupContainer>
           <form onSubmit={handleSubmit}>
             <InputWrapper>
-              <FaRegUser />
+              <FaRegUser style={{ fontSize: '30px'}} />
               <InputField
                 type='text'
                 name='name'
@@ -98,7 +110,7 @@ const IndividualSignup = () => {
               />
             </InputWrapper>
             <InputWrapper>
-              <FaEnvelope />
+              <FaIdCardClip style={{ fontSize: '30px'}} />
               <InputField
                 type="text"
                 name="username"
@@ -108,7 +120,7 @@ const IndividualSignup = () => {
               />
             </InputWrapper>
             <InputWrapper>
-              <FaLock />
+              <FaLock style={{ fontSize: '30px'}} />
               <InputField
                 type="password"
                 name='password'
@@ -118,7 +130,7 @@ const IndividualSignup = () => {
               />
             </InputWrapper>
             <InputWrapper>
-              <FaLock />
+              <FaLock style={{ fontSize: '30px'}} />
               <InputField
                 type='password'
                 name='confirmPassword'
@@ -127,22 +139,22 @@ const IndividualSignup = () => {
                 onChange={handleChange}
               />
             </InputWrapper>
-            {/* <InputWrapper>
-              <FaMapLocationDot />
-              <InputField
+            <InputWrapper>
+            <FaEnvelope style={{ fontSize: '30px'}} />
+            <InputField
                 type='text'
-                name='location'
-                placeholder='거주 지역'
-                value={formData.location}
+                name='email'
+                placeholder='이메일'
+                value={formData.email}
                 onChange={handleChange}
               />
-            </InputWrapper> */}
+            </InputWrapper>
           </form>
         </SignupContainer>
           <SubContainer>
             <form onSubmit={handleSubmit}>
               <InputWrapper>
-              <FaMapLocationDot />
+              <FaMapLocationDot style={{ fontSize: '30px'}} />
               <InputField
                 type='text'
                 name='location'
@@ -151,46 +163,45 @@ const IndividualSignup = () => {
                 onChange={handleChange}
               />
               </InputWrapper>
-              <RadioGroup>
-                <Label>
-                  <RadioButton
-                    type='radio'
-                    name='gender'
-                    value='남'
-                    checked={formData.gender === '남'}
-                    onChange={handleChange}
-                  />
-                  남
-                </Label>
-                <Label>
-                  <RadioButton
-                    type='radio'
-                    name='gender'
-                    value='여'
-                    checked={formData.gender === '여'}
-                    onChange={handleChange}
-                  />
-                  여
-                </Label>
-              </RadioGroup>
+              <InputWrapper>
+              <SlCalender style={{ fontSize: '30px'}} />
               <CalendarContainer>
-                <Calendar
+                <DatePickerStyle
+                  selected={selectedDate}
                   onChange={handleDateChange}
-                  value={selectedDate}
-                  locale='ko-KR'
+                  dateFormat="yyyy/MM/dd"
+                  placeholderText='생년월일 선택'
                 />
-                {formData.birthYear && formData.birthMonth && formData.birthDay && (
-                  <p>{formData.birthYear}년 {formData.birthMonth}월 {formData.birthDay}일</p>
-                )}
-                <ConfirmButton type="button" onClick={handleDateConfirm}>
-                  확인
-                </ConfirmButton>
-              </CalendarContainer>  
+              </CalendarContainer>
+              </InputWrapper>
+                <GenderBox>
+                  <h1 style={{ fontSize: '25px' }}>성별 선택</h1>
+                </GenderBox>
+              <GenderContainer>
+                <GenderButton
+                  type='button'
+                  name='gender'
+                  selected={ formData.gender === '남자'}
+                  onClick={() => handleGenderSelect('남자')}
+                >
+                  남자
+                </GenderButton>
+                <GenderButton
+                  type='button'
+                  name='gender'
+                  selected={ formData.gender === '여자'}
+                  onClick={() => handleGenderSelect('여자')}
+                >
+                  여자
+                </GenderButton>
+              </GenderContainer>
             </form>
           </SubContainer>
         </ContainerWrapper>
       {error && <ErrorMessage>{error}</ErrorMessage>}
-      <SignupButton type='submit'>회원가입</SignupButton>
+      <form onSubmit={handleSubmit}>
+        <SignupButton type='submit'>회원가입</SignupButton>
+      </form>
     </LargeContainer>
   );
 };

@@ -54,7 +54,7 @@ const HamburgerMenu = () => {
                 <ProgressBar>
                   <div className="progress" style={{ width: `${progressPercentage}%` }}></div>
                 </ProgressBar>
-                <p>{userData.reviewCount}/{maxReviews} P</p>
+                <p style={{ fontSize: "20px"}}>{userData.reviewCount}/{maxReviews} P</p>
               </div>
             </UserInfo>
           <MenuBox>
