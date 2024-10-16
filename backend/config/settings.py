@@ -49,8 +49,8 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React 앱이 실행되는 주소
-    "http://127.0.0.1:3000",
+    "http://localhost:3001",  # React 앱이 실행되는 주소
+    "http://127.0.0.1:8000",
 ]
 
 MIDDLEWARE = [
@@ -104,25 +104,25 @@ DATABASES = {
 
 
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'default_db',
-        'USER': 'your_username',
-        'PASSWORD': 'your_password',
+        'NAME': 'default_festa',
+        'USER': 'root',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306',
     },
     'user_db': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'user_db',
-        'USER': 'your_username',
-        'PASSWORD': 'your_password',
+        'USER': 'root',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306',
     },
     'company_db': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'company_db',
-        'USER': 'your_username',
-        'PASSWORD': 'your_password',
+        'USER': 'root',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306',
     },
@@ -170,6 +170,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = (
+    'api.backends.CustomUserBackend',
+    'django.contrib.auth.backends.ModelBackend',  # Django 기본 백엔드도 추가
+)
+
 
 
 # REST_FRAMEWORK = { #JWT 인증을 사용하기 위한 설정
