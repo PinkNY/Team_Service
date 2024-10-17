@@ -56,7 +56,7 @@ export const SignupContainer = styled.div`
 
 export const InputField = styled.input`
   display: flex;
-  width: 100%;
+  width: 30vw;
   padding: 10px;
   font-size: 25px;
   margin: 5px;
@@ -84,8 +84,10 @@ export const SignupButton = styled.button`
 `;
 
 export const CalendarContainer = styled.div`
-  margin: 20px 0;
+  margin-top: 5px;
   font-size: 20px;
+
+  // border: 3px solid black;
 `;
 
 export const Label = styled.label`
@@ -126,21 +128,6 @@ export const SubContainer = styled.div`
   // border-radius: 15px;
 `;
 
-export const DatePickerStyle = styled(DatePicker)`
-  display: flex;
-  width: 90%;
-  padding: 10px 5px;
-  font-size: 25px;
-  margin: 0 5px;
-
-  border: 3px solid black;
-  border-radius: 15px;
-
-  ::placeholder {
-    font-size: 20px;
-  }
-`;
-
 export const GenderContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -158,10 +145,10 @@ export const GenderBox = styled.div`
 
 export const GenderButton = styled.button`
   flex: 1;
-  padding: 10px;
-  background-color: ${(props) => (props.selected ? '#222' : '#444')};
-  color: ${(props) => (props.selected ? '#00ff00' : '#ccc')};
-  border: ${(props) => (props.selected ? '3px solid #00ff00' : '3px solid #666')};
+  padding: 5px 10px;
+  background-color: ${(props) => (props.selected ? 'white' : '#444')};
+  color: ${(props) => (props.selected ? 'black' : 'white')};
+  border: ${(props) => (props.selected ? '3px solid black' : '3px solid #666')};
   border-radius: 15px;
   cursor: pointer;
   font-size: 25px;
