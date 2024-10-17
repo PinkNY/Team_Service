@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
@@ -7,7 +7,7 @@ import { FaRegUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { FaMapLocationDot, FaIdCardClip } from 'react-icons/fa6';
 import { SlCalender } from "react-icons/sl";
 
-import { SignupContainer, InputField, SignupButton, ErrorMessage, InputWrapper, CalendarContainer, SubContainer, LargeContainer, ContainerWrapper, DatePickerStyle, GenderButton, GenderContainer, GenderBox } from '../styles/IndividualSignupSt';
+import { SignupContainer, InputField, SignupButton, ErrorMessage, InputWrapper, SubContainer, LargeContainer, ContainerWrapper, GenderButton, GenderContainer, GenderBox, CalendarContainer } from '../styles/IndividualSignupSt';
 
 const IndividualSignup = () => {
   const [formData, setFormData] = useState({
@@ -24,23 +24,31 @@ const IndividualSignup = () => {
   });
 
   const [error, setError] = useState('');
-  const [selectedDate, setSelectedDate] = useState(null);
   const navigate = useNavigate();
+
+  const birthMonthRef = useRef(null);
+  const birthDayRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    setFormData({
-      ...formData,
-      birthYear: date.getFullYear(),
-      birthMonth: date.getMonth() + 1,
-      birthDay: date.getDate(),
-    });
-  }
+    if (['birthYear', 'birthMonth', 'birthDay'].includes(name)) {
+      if (!/^[0-9]*$/.test(value)) return; // 숫자만 입력 가능하게 제한
+    }
+
+    // 두 자리 이상 입력되지 않게 제한
+    if (name === 'birthMonth' && value.length > 2) return;
+    if (name === 'birthDay' && value.length > 2) return;
+
+    setFormData({ ...formData, [name]: value });
+
+    // 입력 후 포커스 이동 처리
+    if (name === 'birthYear' && value.length === 4) {
+      birthMonthRef.current.focus();
+    } else if (name === 'birthMonth' && value.length === 2) {
+      birthDayRef.current.focus();
+    }
+  };
 
   const handleGenderSelect = (gender) => {
     setFormData({
@@ -78,8 +86,8 @@ const IndividualSignup = () => {
       setError('성별을 선택해주세요.');
       return;
     }
-    if (!birthYear || !birthMonth || !birthDay) {
-      setError('출생년, 월, 일을 모두 선택해주세요.');
+    if (!/^(19|20)\d{2}$/.test(birthYear) || !/^(0[1-9]|1[0-2])$/.test(birthMonth) || !/^(0[1-9]|[12][0-9]|3[01])$/.test(birthDay)) {
+      setError('생년월일을 다시 한 번 확인해주세요.');
       return;
     }
     setError('');
@@ -179,12 +187,29 @@ const IndividualSignup = () => {
               <InputWrapper>
               <SlCalender style={{ fontSize: '30px'}} />
               <CalendarContainer>
-                <DatePickerStyle
-                  selected={selectedDate}
-                  onChange={handleDateChange}
-                  dateFormat="yyyy/MM/dd"
-                  placeholderText='생년월일 선택'
-                />
+              <InputField
+                type='text'
+                name='birthYear'
+                placeholder='출생년도 (YYYY)'
+                value={formData.birthYear}
+                onChange={handleChange}
+              />
+              <InputField
+                type='text'
+                name='birthMonth'
+                placeholder='출생월 (MM)'
+                value={formData.birthMonth}
+                onChange={handleChange}
+                ref={birthMonthRef}
+              />
+              <InputField
+                type='text'
+                name='birthDay'
+                placeholder='출생일 (DD)'
+                value={formData.birthDay}
+                onChange={handleChange}
+                ref={birthDayRef}
+              />
               </CalendarContainer>
               </InputWrapper>
                 <GenderBox>

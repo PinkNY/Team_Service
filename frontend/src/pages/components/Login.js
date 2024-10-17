@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FaRegUser, FaLock } from "react-icons/fa";
 
-import { LoginPageContainer, InputField, LoginButton, ErrorMessage, LoginContainer, SignupButton, EtcButtons, FindIdButton, FindPasswordButton } from '../styles/LoginSt';
+import { LoginPageContainer, InputField, LoginButton, ErrorMessage, LoginContainer, SignupButton, EtcButtons, FindIdButton, FindPasswordButton, InputContainer } from '../styles/LoginSt';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -36,18 +37,24 @@ const Login = () => {
     <LoginPageContainer>
       <LoginContainer>
         <h2 style={{ fontSize: "80px" }}>로그인</h2>
-        <InputField
-          type="text"
-          placeholder="아이디"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <InputField
-          type="password"
-          placeholder="비밀번호"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <InputContainer>
+          <FaRegUser style={{ fontSize: '30px'}} />
+          <InputField
+            type="text"
+            placeholder="아이디"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </InputContainer>
+        <InputContainer>
+          <FaLock style={{ fontSize: '30px'}} />
+          <InputField
+            type="password"
+            placeholder="비밀번호"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />          
+        </InputContainer>
         {error && <ErrorMessage>{error}</ErrorMessage>}
           <div style={{ display: 'flex', gap: '10px' }}>
           <LoginButton onClick={handleLogin}>로그인</LoginButton>

@@ -3,10 +3,9 @@ import { media } from '../MediaQ';
 
 export const LoginPageContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 800px;
   background-color: white;
 
   // border: 3px solid black;
@@ -20,26 +19,42 @@ export const LoginContainer = styled.div`
   width: 80vw;
   background-color: white;
 
-  // border: 3px solid black;
-  // border-radius: 15px;
+  border: 3px solid black;
+  border-radius: 15px;
 
-  ${media.pc} {
-    width: 1100px;
+  h2 {
+    margin-bottom: 20px;
   }
+
+  // ${media.pc} {
+  //   width: 1100px;
+  // }
 
   ${media.mobile} {
     margin-top: 40px;
   }
 `;
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  
+  // border: 3px solid black;
+`;
 
 export const InputField = styled.input`
-  width: 40vw;
+  width: 50vw;
   height: 6vh;
   padding: 10px;
-  margin: 10px 0;
+  margin: 10px 20px;
   border: 3px solid black;
   border-radius: 15px;
   font-size: 25px;
+
+  ${media.pc} {
+    width: 700px;
+  }
 
   ${media.mobile} {
     font-size: 10px;
@@ -69,6 +84,10 @@ export const LoginButton = styled.button`
   border-radius: 15px;
   cursor: pointer;
   font-size: 35px;
+  
+  ${media.pc} {
+    width: 400px;
+  }
 
   ${media.mobile} {
     font-size: 10px;
@@ -82,13 +101,23 @@ export const LoginButton = styled.button`
 `;
 
 export const EtcButtons = styled.div`
-  width: 60vw;
+  width: 50vw;
   height: 100px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 5%;
+
+  ${media.tablet} {
+    width: 60vw;
+    margin-left: 30px;
+  }
+
+  ${media.mobile} {
+    width: 60vw;
+    gap: 10%;
+  }
 
   // border: 3px solid black;
 `;
@@ -122,6 +151,10 @@ export const FindIdButton = styled.button`
   cursor: pointer;
   font-size: 20px;
 
+  ${media.tablet} {
+    width: 35vw;
+  }
+
   ${media.mobile} {
     font-size: 10px;
   }
@@ -132,7 +165,7 @@ export const FindIdButton = styled.button`
 `;
 
 export const FindPasswordButton = styled.button`
-  width: 35vw;
+  width: 30vw;
   padding: 10px;
   background-color: white;
   color: black;
@@ -141,8 +174,13 @@ export const FindPasswordButton = styled.button`
   cursor: pointer;
   font-size: 20px;
 
+  ${media.tablet} {
+    width: 40vw;
+  }
+
   ${media.mobile} {
     font-size: 10px;
+    width: 40vw;
   }
 
   &:hover {
