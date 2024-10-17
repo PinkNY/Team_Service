@@ -7,7 +7,7 @@ import { FaRegUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { FaMapLocationDot, FaIdCardClip } from 'react-icons/fa6';
 import { SlCalender } from "react-icons/sl";
 
-import { SignupContainer, InputField, SignupButton, ErrorMessage, InputWrapper, SubContainer, LargeContainer, ContainerWrapper, GenderButton, GenderContainer, GenderBox, CalendarContainer } from '../styles/IndividualSignupSt';
+import { SignupContainer, InputField, SignupButton, ErrorMessage, InputWrapper, SubContainer, LargeContainer, ContainerWrapper, GenderButton, GenderContainer, GenderBox, CalendarContainer, InputField2, InputWrapper2 } from '../styles/IndividualSignupSt';
 
 const IndividualSignup = () => {
   const [formData, setFormData] = useState({
@@ -150,8 +150,7 @@ const IndividualSignup = () => {
                 onChange={handleChange}
               />
             </InputWrapper>
-            <InputWrapper>
-              <FaLock style={{ fontSize: '30px'}} />
+            <InputWrapper2>
               <InputField
                 type='password'
                 name='confirmPassword'
@@ -159,7 +158,7 @@ const IndividualSignup = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
               />
-            </InputWrapper>
+            </InputWrapper2>
             <InputWrapper>
             <FaEnvelope style={{ fontSize: '30px'}} />
             <InputField
@@ -187,14 +186,14 @@ const IndividualSignup = () => {
               <InputWrapper>
               <SlCalender style={{ fontSize: '30px'}} />
               <CalendarContainer>
-              <InputField
+              <InputField2
                 type='text'
                 name='birthYear'
                 placeholder='출생년도 (YYYY)'
                 value={formData.birthYear}
                 onChange={handleChange}
               />
-              <InputField
+              <InputField2
                 type='text'
                 name='birthMonth'
                 placeholder='출생월 (MM)'
@@ -202,7 +201,7 @@ const IndividualSignup = () => {
                 onChange={handleChange}
                 ref={birthMonthRef}
               />
-              <InputField
+              <InputField2
                 type='text'
                 name='birthDay'
                 placeholder='출생일 (DD)'

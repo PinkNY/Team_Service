@@ -3,9 +3,11 @@ import React from 'react';
 import { MainContainer } from '../styles/MainSt';
 import SearchBar from './Search';
 import DoubleCont from './WrapCont';
-import { MapContainer } from '../styles/MapSt';
 import NoticeBar from './Notice';
 import BottomCon from './BotContainer';
+
+import Chatbot from './ChatBot';
+// import { MapContainer } from '../styles/MapSt';
 
 const Main = () => {
   return (
@@ -14,9 +16,10 @@ const Main = () => {
       <NoticeBar />
       <DoubleCont />
       <SearchBar />
-      <MapContainer>
+      {/* <MapContainer>
         <h1>Map</h1>
-      </MapContainer>
+      </MapContainer> */}
+      <Chatbot />
       <BottomCon />
     </MainContainer>
     </>
