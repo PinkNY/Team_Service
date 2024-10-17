@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import DatePicker from "react-datepicker";
 import { media } from '../MediaQ';
 
 export const LargeContainer = styled.div`
@@ -16,7 +15,7 @@ export const LargeContainer = styled.div`
 
   ${media.mobile} {
     height: 100vh;
-    margin-top: 30%;
+    margin-top: 20%;
   }
 `;
 
@@ -50,6 +49,11 @@ export const SignupContainer = styled.div`
   margin: 0 auto;
   background-color: white;
 
+  ${media.mobile} {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
   // border: 3px solid black;
   // border-radius: 15px;
 `;
@@ -61,6 +65,26 @@ export const InputField = styled.input`
   font-size: 25px;
   margin: 5px;
   border: ${(props) => (props.hasError ? '2px solid red' : '3px solid black' )};
+
+  ${media.mobile} {
+    width: 100%;
+  }
+
+  // border: 3px solid black;
+  border-radius: 15px;
+`;
+
+export const InputField2 = styled.input`
+  display: flex;
+  width: 30vw;
+  padding: 10px;
+  font-size: 25px;
+  margin: 5px;
+  border: ${(props) => (props.hasError ? '2px solid red' : '3px solid black' )};
+
+  ${media.mobile} {
+    width: 90%;
+  }
 
   // border: 3px solid black;
   border-radius: 15px;
@@ -83,13 +107,6 @@ export const SignupButton = styled.button`
   border-radius: 15px;
 `;
 
-export const CalendarContainer = styled.div`
-  margin-top: 5px;
-  font-size: 20px;
-
-  // border: 3px solid black;
-`;
-
 export const Label = styled.label`
   flex: 1;
   padding: 10px;
@@ -107,7 +124,33 @@ export const Label = styled.label`
 export const InputWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-bottom: 10px;
+
+  // border: 3px solid black;
+
+  ${media.mobile} {
+    width: 100%;
+  }
+
+  svg {
+    margin-right: 10px;
+    color: #888;    // 아이콘 색상
+  }
+`;
+
+export const InputWrapper2 = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 10px 30px;
+
+  // border: 3px solid black;
+
+  ${media.mobile} {
+    width: 91%;
+    margin-left: 35px;
+  }
 
   svg {
     margin-right: 10px;
@@ -124,8 +167,24 @@ export const SubContainer = styled.div`
   height: 100%;
   background-color: white;
 
+  ${media.mobile} {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
   // border: 3px solid black;
   // border-radius: 15px;
+`;
+
+export const CalendarContainer = styled.div`
+  margin-top: 5px;
+  font-size: 20px;
+
+  ${media.mobile} {
+    width: 100%;
+  }
+
+  // border: 3px solid black;
 `;
 
 export const GenderContainer = styled.div`
