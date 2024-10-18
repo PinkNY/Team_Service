@@ -1,30 +1,23 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { MdNotifications } from "react-icons/md";
-
-import { NavContainer, LoginButton, Logo, RightCon, AlarmIcon } from "../styles/NavSt";
-import HamburgerMenu from "./HamburgerMenu";
+import React from "react"
+import { Nav, NavContent, Logo, NavButtons, Button } from '../styles/NavSt';
+import { Bell, Menu } from 'lucide-react';
 
 const Navbar = () => {
-  const navigate = useNavigate();
-
-  const handleLoginClick = () => {
-    navigate("/login");
-  };
-
   return (
-    <NavContainer>
-      <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-        <Logo>F</Logo>
-      </Link>
-      <RightCon>
-        <AlarmIcon>
-          <MdNotifications />
-        </AlarmIcon>
-        <LoginButton onClick={handleLoginClick}>Login</LoginButton>
-        <HamburgerMenu />
-      </RightCon>
-    </NavContainer>
+    <Nav>
+      <NavContent>
+        <Logo>축제로</Logo>
+        <NavButtons>
+          <Button ghost>
+            <Bell size={20} />
+          </Button>
+          <Button primary>로그인</Button>
+          <Button ghost style={{ display: 'block', '@media (min-width: 768px)': { display: 'none' } }}>
+          <Menu size={24} />
+        </Button>
+        </NavButtons>
+      </NavContent>
+    </Nav>
   );
 };
 
