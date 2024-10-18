@@ -1,74 +1,61 @@
 import styled from "styled-components";
-import { media } from "../MediaQ";
 
-export const NavContainer = styled.nav`
+export const Nav = styled.nav`
+  background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+`;
+
+export const NavContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  color: black;
-  padding: 0 40px;
-  margin: 10px auto;
-
-  // border: 3px solid black;
-
-  ${media.pc} {
-    width: 1000px;
-  }
-
-  ${media.mobile} {
-    font-size: 50px;
-    padding: 0 10px 0 30px;
-  }
+  align-items: center;
 `;
 
 export const Logo = styled.div`
-  font-size: 100px;
+  font-size: 3rem;
   font-weight: bold;
-  cursor: pointer;
+  color: #3b82f6;
+`;
 
-  ${media.mobile} {
-    font-size: 50px;
+export const NavButtons = styled.div`
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 `;
 
-export const RightCon = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-
-  ${media.mobile} {
-    font-size: 50px;
-    gap: 5px;
-  }
-`;
-
-export const AlarmIcon = styled.div`
-  font-size: 50px;
-  color: black;
+export const Button = styled.button`
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
   cursor: pointer;
-  display: flex;
-  align-center: center;
+  transition: background-color 0.2s;
 
-  ${media.mobile} {
-    font-size: 40px;
-  }
-`;
+  ${(props) =>
+    props.primary &&
+    `
+    background-color: #3b82f6;
+    color: white;
+    &:hover {
+      background-color: #2563eb;
+    }
+  `}
 
-export const LoginButton = styled.button`
-  background-color: white;
-  color: black;
-  font-size: 30px;
-  border: 1px solid black;
-  border-radius: 15px;
-  padding: 8px 16px;
-  cursor: pointer;
-
-  &:hover {
-  background-color: gray;
-  }
-
-  ${media.mobile} {
-    font-size: 20px;
-  }
+  ${(props) =>
+    props.ghost &&
+    `
+    background-color: transparent;
+    &:hover {
+      background-color: #f3f4f6;
+    }
+  `}
 `;

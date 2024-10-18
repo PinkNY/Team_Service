@@ -1,41 +1,29 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { Search } from 'lucide-react';
 
-export const SearchForm = styled.form`
+export const SearchWrapper = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 20px 0;
-  width: 100%;
-  position: relative;
-
-  @media (min-width: 1024px) {
-    width: 1100px;
-  }
 `;
 
-export const SearchInput = styled.div`
-  padding: 10px;
-  font-size: 15px;
-  border: 3px solid black;
-  border-radius: 15px;
-  width: 100%;
-  height: 30px;
-  margin-rigth: 10px;
-  position: relative;
+export const SearchInput = styled.input`
+  width: 50%;
+  font-size: 20px;
+  padding: 1rem 1rem 1rem 2.5rem;
+  border-radius: 9999px;
+  border: 2px solid #3b82f6;
 
   &:focus {
     outline: none;
-    border-color: #007BFF;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
   }
 `;
 
-export const SearchButton = styled.button`
+export const SearchIcon = styled(Search)`
   position: absolute;
-  right: 5px;
-
-  padding: 10px 20px;
-  background-color: transparent;
-  font-size: 40px;
-  border: none;
-  cursor: pointer;
+  left: 19.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
 `;

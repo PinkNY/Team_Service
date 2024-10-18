@@ -1,12 +1,17 @@
 import React from "react";
-import { Bar, Ment, MentBar } from "../styles/NoticeSt";
+import { First, NoticeBanner, Second } from '../styles/NoticeSt';
 
-const NoticeBar = () => {
+const Notice = () => {
   return (
-    <MentBar>
-      <Ment>업데이트 중...</Ment>
-    </MentBar>
+    <NoticeBanner>
+      <First>
+        <p style={{ fontWeight: 'bold', fontSize: '2rem' }}>공지사항</p>
+      </First>
+      <Second>
+        <p style={{ fontSize: '30px' }}>2024년 축제 일정이 업데이트 되었습니다. 확인해 보세요!</p>
+      </Second>
+    </NoticeBanner>
   );
 };
 
-export default NoticeBar;
+export default Notice;
