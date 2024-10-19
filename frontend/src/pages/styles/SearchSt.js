@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Search } from 'lucide-react';
+import { media } from "../MediaQ";
 
 export const SearchWrapper = styled.div`
   position: relative;
@@ -14,6 +15,10 @@ export const SearchInput = styled.input`
   border-radius: 9999px;
   border: 2px solid #3b82f6;
 
+  ${media.mobile} {
+    width: 100%;
+  }
+
   &:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
@@ -26,4 +31,9 @@ export const SearchIcon = styled(Search)`
   top: 50%;
   transform: translateY(-50%);
   color: #9ca3af;
+
+  ${media.mobile} {
+    left: 0;
+    margin-left: 2.5%;
+  }
 `;

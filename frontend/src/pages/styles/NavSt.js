@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "../MediaQ";
 
 export const Nav = styled.nav`
   background-color: white;
@@ -24,17 +25,46 @@ export const Logo = styled.div`
 `;
 
 export const NavButtons = styled.div`
-  display: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 
-  @media (min-width: 768px) {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  /* 모바일 환경에서는 벨 아이콘과 로그인 버튼 숨기기 */
+  ${media.mobile} {
+    .bell-icon,
+    .login-button {
+      display: none;
+    }
+    .hamburger-button {
+      display: block;
+    }
+  }
+
+  /* 태블릿 및 PC 환경에서는 벨 아이콘과 로그인 버튼 보이기 */
+  ${media.tablet} {
+    .bell-icon,
+    .login-button {
+      display: flex;
+    }
+    .hamburger-button {
+      display: none;
+    }
+  }
+
+  ${media.pc} {
+    .bell-icon,
+    .login-button {
+      display: flex;
+    }
+    .hamburger-button {
+      display: none;
+    }
   }
 `;
 
 export const Button = styled.button`
   padding: 0.5rem 1rem;
+  border: none;
   border-radius: 0.25rem;
   font-weight: 500;
   cursor: pointer;
@@ -58,4 +88,23 @@ export const Button = styled.button`
       background-color: #f3f4f6;
     }
   `}
+`;
+
+export const MobileMenu = styled.div`
+  display: ${({ open }) => (open ? 'flex' : 'none')};
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 70%;
+  background-color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  padding-top: 3rem;
+  z-index: 100;
+  align-items: flex-start;
+
+  ${Button} {
+    margin: 1rem;
+  }
 `;

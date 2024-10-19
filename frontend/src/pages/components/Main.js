@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PageWrapper, Button, MainContent, ChatbotButton, ChatbotWindow, ChatbotMessages, SearchInput, HalfBox } from '../styles/MainSt';
+import { PageWrapper, Button, MainContent, ChatbotButton, ChatbotWindow, ChatbotMessages, SearchInput, HalfBox, SendWindow, ChatBubble } from '../styles/MainSt';
 import { MessageCircle, X } from 'lucide-react';
 import Notice from './Notice';
 import Hotlist from './Hot';
@@ -27,10 +27,12 @@ export default function MainPage() {
         <ChatbotWindow>
           <h3 style={{ fontWeight: 'bold', fontSize: '1.125rem', marginBottom: '0.5rem' }}>챗봇</h3>
           <ChatbotMessages>
-            <p style={{ marginBottom: '0.5rem' }}>안녕하세요! 무엇을 도와드릴까요?</p>
+            <ChatBubble>안녕하세요! 무엇을 도와드릴까요?</ChatBubble>
           </ChatbotMessages>
-          <SearchInput type="text" placeholder="메시지를 입력하세요..." style={{ marginBottom: '0.5rem' }} />
-          <Button primary style={{ width: '100%' }}>전송</Button>
+          <SendWindow>
+            <SearchInput type="text" placeholder="메시지를 입력하세요..." />
+            <Button primary style={{ width: '20%' }}>전송</Button>
+          </SendWindow>
         </ChatbotWindow>
       )}
     </PageWrapper>
