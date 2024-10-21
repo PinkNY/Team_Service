@@ -3,39 +3,43 @@ name: Deploy React App to Azure
 on:
   push:
     branches:
-      - main  # 메인 브랜치에 push될 때 배포
+      - main # 메인 브랜치에 push될 때 배포
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
-    - name: Install dependencies
-      run: npm install
-      working-directory: ./frontend  # 프론트엔드 폴더 경로
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend # 프론트엔드 폴더 경로
 
-    - name: Build the React app
-      run: npm run build
-      working-directory: ./frontend
+      - name: Build the React app
+        run: npm run build
+        working-directory: ./frontend
 
-    # Azure 로그인 추가
-    - name: 'Login to Azure'
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: ./frontend/build
 
-    - name: 'Deploy to Azure Web App'
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v3
-      with:
-        app-name: 'frontendazure'
-        slot-name: 'Production'
-        package: './frontend/build'
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'frontendazure'
+          slot-name: 'Production'
+          package: './frontend/build'
