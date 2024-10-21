@@ -26,12 +26,12 @@ jobs:
       - name: Install dependencies
         run: |
           source venv/bin/activate
-          pip install -r requirements.txt
+          pip install -r backend/requirements.txt  # 경로 수정
         
       # Optional: Add step to run Django tests here (pytest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip . -x '*.git*' -x 'venv/*'
+        run: zip -r release.zip backend -x '*.git*' -x 'venv/*'  # backend 폴더만 압축
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -68,4 +68,4 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'backendazure'
-          package: '.'  # Django 프로젝트 전체를 배포
+          package: './backend'  # backend 폴더 배포
