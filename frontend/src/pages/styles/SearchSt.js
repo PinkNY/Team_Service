@@ -5,14 +5,26 @@ import { media } from "../MediaQ";
 export const SearchWrapper = styled.div`
   position: relative;
   display: flex;
+  width: 30rem;
   justify-content: center;
   gap: 10px;
+  
+  // border: 3px solid black;
+
+  ${media.mobile} {
+    width: 18rem;
+    gap: 5px;
+  }
+
+  ${media.tablet} {
+    width: 27rem;
+  }
 `;
 
 export const SearchInput = styled.input`
-  width: 50%;
+  width: 80%;
   font-size: 20px;
-  padding: 1rem 1rem 1rem 2.5rem;
+  padding: 0.5rem 0 0.5rem 3rem;
   border-radius: 9999px;
   border: 2px solid #3b82f6;
 
@@ -34,11 +46,11 @@ export const SearchIcon = styled(Search)`
   
   ${media.pc} {
     position: absolute;
-    left: 275px;
+    left: 1.2rem;
   }
 
   ${media.tablet} {
-    left: 3rem;
+    left: 1rem;
   }
 
   ${media.mobile} {

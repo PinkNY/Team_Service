@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { media } from "../MediaQ";
 
+import { FaSearch } from "react-icons/fa";
+
 export const Nav = styled.nav`
   background-color: white;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
@@ -22,44 +24,11 @@ export const Logo = styled.div`
   font-size: 3rem;
   font-weight: bold;
   color: #3b82f6;
+  cursor: pointer;
 `;
 
-export const NavButtons = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-
-  /* 모바일 환경에서는 벨 아이콘과 로그인 버튼 숨기기 */
-  ${media.mobile} {
-    .bell-icon,
-    .login-button {
-      display: none;
-    }
-    .hamburger-button {
-      display: block;
-    }
-  }
-
-  /* 태블릿 및 PC 환경에서는 벨 아이콘과 로그인 버튼 보이기 */
-  ${media.tablet} {
-    .bell-icon,
-    .login-button {
-      display: flex;
-    }
-    .hamburger-button {
-      display: none;
-    }
-  }
-
-  ${media.pc} {
-    .bell-icon,
-    .login-button {
-      display: flex;
-    }
-    .hamburger-button {
-      display: none;
-    }
-  }
+export const SearchCon = styled(FaSearch)`
+  cursor: pointer;
 `;
 
 export const Button = styled.button`
@@ -90,21 +59,44 @@ export const Button = styled.button`
   `}
 `;
 
+export const NavButtons = styled.div`
+  display: flex;
+  align-items: center;
+
+  /* 데스크탑 및 태블릿에서는 알림과 로그인 버튼이 보이게 설정 */
+  .desktop-only {
+    display: none;
+  }
+
+  /* 모바일에서는 햄버거 메뉴 안으로 들어감 */
+  @media (min-width: 768px) {
+    .desktop-only {
+      display: block;
+    }
+  }
+`;
+
 export const MobileMenu = styled.div`
-  display: ${({ open }) => (open ? 'flex' : 'none')};
-  flex-direction: column;
   position: fixed;
   top: 0;
   right: 0;
-  height: 100%;
-  width: 70%;
+  width: 50%;
+  height: 100vh;
   background-color: white;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-  padding-top: 3rem;
-  z-index: 100;
-  align-items: flex-start;
+  display: ${({ open }) => (open ? 'block' : 'none')};
+  z-index: 9999;
 
-  ${Button} {
-    margin: 1rem;
+  .close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
   }
+`;
+
+export const MobileMenuCon1 = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 3px solid black;
 `;

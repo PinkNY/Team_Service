@@ -17,7 +17,6 @@ export default function MainPage() {
           <Hotlist />
           <Hotlist />
         </HalfBox>
-        <SearchBar />
         <MapContainer />
       </MainContent>
       <ChatbotButton onClick={() => setIsChatbotOpen(!isChatbotOpen)}>
