@@ -16,6 +16,10 @@ export const MainContent = styled.main`
   justify-content: center;
   flex-direction: column;
   gap: 2rem;
+
+  ${media.mobile} {
+    margin: 0;
+  }
 `;
 
 export const SearchInput = styled.input`
