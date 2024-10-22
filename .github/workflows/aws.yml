@@ -31,7 +31,7 @@ jobs:
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_PUBLIC_IP }} "
-        cd /home/ubuntu/backend  # 실제 백엔드 프로젝트 경로로 이동 (EC2 인스턴스에서)
+        cd /home/ubuntu/Team_Service/backend  # 백엔드 프로젝트 경로로 이동
         git pull origin main  # 최신 코드 가져오기
         python3 -m venv venv  # 가상 환경 생성
         source venv/bin/activate  # 가상 환경 활성화
