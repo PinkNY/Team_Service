@@ -19,28 +19,17 @@ jobs:
         with:
           submodules: true
           lfs: false
-
-      # Node.js 설치 (프론트엔드 프로젝트의 경우 필요)
-      - name: Set up Node.js version
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.20.4'  # 필요한 Node.js 버전
-
-      # 패키지 설치 및 취약점 수정
-      - name: Install and update dependencies
+      
+      - name: Install dependencies
         run: |
           cd frontend
           npm install
-          npm audit fix --force  # 보안 문제 수정
-
-      # 애플리케이션 빌드
-      - name: Build React app
+      
+      - name: Build React app without stopping on warnings
         run: |
           cd frontend
           CI=false npm run build
 
-
-      # Azure Static Web Apps로 배포
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -48,9 +37,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_AMBITIOUS_RIVER_00FC37A00 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
-          app_location: "./frontend"  # App source code path
-          output_location: "./frontend/build"  # 빌드 결과물 위치
-          api_location: ""  # API가 없으므로 비워둠
+          app_location: "./frontend" # App source code path
+          api_location: "" # Api source code path - optional
+          output_location: "build" # Built app content directory - optional
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
