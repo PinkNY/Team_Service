@@ -3,7 +3,6 @@ import { PageWrapper, Button, MainContent, ChatbotButton, ChatbotWindow, Chatbot
 import { MessageCircle, X } from 'lucide-react';
 import Notice from './Notice';
 import Hotlist from './Hot';
-import SearchBar from './Search';
 import MapContainer from './Map';
 
 export default function MainPage() {

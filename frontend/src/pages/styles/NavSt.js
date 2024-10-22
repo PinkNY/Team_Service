@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { media } from "../MediaQ";
+// import { media } from "../MediaQ";
 
 import { FaSearch } from "react-icons/fa";
 
