@@ -25,12 +25,15 @@ SECRET_KEY = 'django-insecure--3m5ujzym14++^e#u_3q^j2cln4^0cze9guf3_)ssg^#sz=cq-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
+    'rest_framework',
+    'api',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +42,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+# 로그인 후 리디렉션할 URL
+LOGIN_REDIRECT_URL = '/'
+
+# 로그아웃 후 리디렉션할 URL
+LOGOUT_REDIRECT_URL = '/'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3001",  # React 앱이 실행되는 주소
+    "http://127.0.0.1:8000",
+]
+
 MIDDLEWARE = [
+     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -66,19 +81,51 @@ TEMPLATES = [
         },
     },
 ]
+AUTH_USER_MODEL = 'api.RegularUser'
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'user_db',      # 데이터베이스 이름
+#         'USER': 'root',      # 데이터베이스 사용자 이름
+#         'PASSWORD': '1234',       # 사용자 비밀번호
+#         'HOST': '192.168.0.79',               # 데이터베이스 서버의 호스트
+#         'PORT': '3306',                    # MySQL 포트 (기본값은 3306)
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'default_festa',  # RDS에 생성한 데이터베이스 이름
+        'USER': 'root',           # RDS에 설정된 사용자 이름
+        'PASSWORD': 'skdudgns1234',  # RDS 사용자 비밀번호
+        'HOST': 'teamprojectdb.chays42e8nbp.ap-northeast-2.rds.amazonaws.com',  # RDS 엔드포인트
+        'PORT': '3306',           # MySQL 기본 포트
+    },
+    'user_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'user_db',        # RDS에 생성한 데이터베이스 이름
+        'USER': 'root',           # RDS에 설정된 사용자 이름
+        'PASSWORD': 'skdudgns1234',  # RDS 사용자 비밀번호
+        'HOST': 'teamprojectdb.chays42e8nbp.ap-northeast-2.rds.amazonaws.com',  # RDS 엔드포인트
+        'PORT': '3306',           # MySQL 기본 포트
+    },
+    'company_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'company_db',     # RDS에 생성한 데이터베이스 이름
+        'USER': 'root',           # RDS에 설정된 사용자 이름
+        'PASSWORD': 'skdudgns1234',  # RDS 사용자 비밀번호
+        'HOST': 'teamprojectdb.chays42e8nbp.ap-northeast-2.rds.amazonaws.com',  # RDS 엔드포인트
+        'PORT': '3306',           # MySQL 기본 포트
     }
 }
+
 
 
 # Password validation
@@ -114,10 +161,25 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
+import os
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = (
+    'api.backends.CustomUserBackend',
+    'django.contrib.auth.backends.ModelBackend',  # Django 기본 백엔드도 추가
+)
+
+
+
+# REST_FRAMEWORK = { #JWT 인증을 사용하기 위한 설정
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ),
+# }
