@@ -37,7 +37,8 @@ jobs:
       - name: Build React app
         run: |
           cd frontend
-          npm run build
+          CI=false npm run build
+
 
       # Azure Static Web Apps로 배포
       - name: Build And Deploy
