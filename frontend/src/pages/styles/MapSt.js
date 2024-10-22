@@ -26,7 +26,7 @@ export const CardTitle = styled.h2`
   justify-content: center;
   margin: 0;
 
-  color: #333;
+  color: white;
 `;
 
 export const MapPlaceholder = styled.div`

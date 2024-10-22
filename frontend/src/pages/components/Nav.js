@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Nav, NavContent, Logo, NavButtons, Button, MobileMenu } from '../styles/NavSt';
 import { Bell, Menu, X } from 'lucide-react';
+import SearchBar from "./Search";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -13,6 +14,7 @@ const Navbar = () => {
     <Nav>
       <NavContent>
         <Logo>축제로</Logo>
+        <SearchBar />
         <NavButtons>
           {/* 모바일 이외의 환경에서는 항상 표시 */}
           <Button ghost className="bell-icon">
