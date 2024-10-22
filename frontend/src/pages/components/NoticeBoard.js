@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { Container, Title, Table, Th, Td, PaginationContainer, PageButton, SearchContainer, Select, Input, Button, notices } from "../styles/NoticeBoardSt";
 
@@ -7,11 +7,11 @@ const NoticeBoard = () => {
   const [searchCategory, setSearchCategory] = useState("title")
   const [searchQuery, setSearchQuery] = useState("")
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleNoticeClick = () => {
-    navigate('/notice');
-  };
+  // const handleNoticeClick = () => {
+  //   navigate('/notice');
+  // };
 
   return (
     <Container>
