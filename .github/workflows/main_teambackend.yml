@@ -18,19 +18,12 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Create and start virtual environment  # 새로 가상환경을 생성
+      - name: Install dependencies  # Azure에서 의존성 설치
         run: |
-          python -m venv venv  # venv 가상환경 생성
-          source venv/bin/activate  # venv 가상환경 활성화
-          
-      - name: Install dependencies
-        run: |
-          source venv/bin/activate  # venv 가상환경 활성화
-          pip install -r backend/requirements.txt  # 의존성 설치
+          pip install -r backend/requirements.txt
 
       - name: Run Django tests  # 선택 사항: 테스트 단계 추가 가능
         run: |
-          source venv/bin/activate  # venv 가상환경 활성화
           python backend/manage.py test  # Django 테스트 실행
 
       - name: Zip artifact for deployment
@@ -66,20 +59,17 @@ jobs:
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'teambackend'  # 앱 이름을 teambackend로 변경
+          app-name: 'teambackend'  # 앱 이름은 teambackend로 설정
           package: './backend'  # backend 폴더 배포
 
       - name: Make migrations  # Django 모델 변경 사항에 대한 마이그레이션 파일 생성
         run: |
-          source venv/bin/activate  # venv 가상환경 활성화
           python backend/manage.py makemigrations
 
       - name: Run database migrations  # 생성된 마이그레이션 파일을 기반으로 DB에 적용
         run: |
-          source venv/bin/activate  # venv 가상환경 활성화
           python backend/manage.py migrate
 
       - name: Collect static files
         run: |
-          source venv/bin/activate  # venv 가상환경 활성화
           python backend/manage.py collectstatic --noinput  # 정적 파일 수집
