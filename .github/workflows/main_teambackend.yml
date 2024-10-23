@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'backend/**'  # backend 디렉토리 안에서만 변경이 있을 때만 트리거
   workflow_dispatch:
 
 jobs:
@@ -26,16 +28,15 @@ jobs:
       - name: Install dependencies
         run: |
           source backend/venv/bin/activate
-          pip install -r backend/requirements.txt  # 경로 수정
+          pip install -r backend/requirements.txt
 
-      # Optional: Add step to run Django tests here (pytest, Django test suites, etc.)
       - name: Run Django tests
         run: |
           source backend/venv/bin/activate
           python backend/manage.py test
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip backend -x '*.git*' -x 'backend/venv/*'  # backend 폴더만 압축 (venv 제외)
+        run: zip -r release.zip backend -x '*.git*' -x 'backend/venv/*'
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -48,9 +49,6 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write
 
     steps:
       - name: Download artifact from build job
@@ -73,15 +71,12 @@ jobs:
 
       - name: Install dependencies on Azure
         run: |
-          pip install -r backend/requirements.txt  # Azure 환경에 필요한 패키지 설치
-
-      - name: Change directory to backend before running commands
-        run: cd backend  # backend 폴더로 이동
+          pip install -r backend/requirements.txt
 
       - name: Run database migrations
         run: |
-          python manage.py migrate
+          python backend/manage.py migrate
 
       - name: Collect static files
         run: |
-          python manage.py collectstatic --noinput
+          python backend/manage.py collectstatic --noinput
