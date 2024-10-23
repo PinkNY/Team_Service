@@ -102,29 +102,30 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'default_festa',  # RDS에 생성한 데이터베이스 이름
-        'USER': 'root',           # RDS에 설정된 사용자 이름
-        'PASSWORD': 'skdudgns1234',  # RDS 사용자 비밀번호
-        'HOST': 'teamprojectdb.chays42e8nbp.ap-northeast-2.rds.amazonaws.com',  # RDS 엔드포인트
-        'PORT': '3306',           # MySQL 기본 포트
+        'NAME': 'default_festa',  # Azure에 있는 DB 이름
+        'USER': 'skdudgns@skdudgnsdb',  # 사용자명@서버명
+        'PASSWORD': '9P@ssw0rd',  # MySQL 비밀번호
+        'HOST': 'skdudgnsdb.mysql.database.azure.com',  # Azure MySQL 호스트
+        'PORT': '3306',
     },
     'user_db': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'user_db',        # RDS에 생성한 데이터베이스 이름
-        'USER': 'root',           # RDS에 설정된 사용자 이름
-        'PASSWORD': 'skdudgns1234',  # RDS 사용자 비밀번호
-        'HOST': 'teamprojectdb.chays42e8nbp.ap-northeast-2.rds.amazonaws.com',  # RDS 엔드포인트
-        'PORT': '3306',           # MySQL 기본 포트
+        'NAME': 'user_db',
+        'USER': 'skdudgns@skdudgnsdb',
+        'PASSWORD': '9P@ssw0rd',
+        'HOST': 'skdudgnsdb.mysql.database.azure.com',
+        'PORT': '3306',
     },
     'company_db': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'company_db',     # RDS에 생성한 데이터베이스 이름
-        'USER': 'root',           # RDS에 설정된 사용자 이름
-        'PASSWORD': 'skdudgns1234',  # RDS 사용자 비밀번호
-        'HOST': 'teamprojectdb.chays42e8nbp.ap-northeast-2.rds.amazonaws.com',  # RDS 엔드포인트
-        'PORT': '3306',           # MySQL 기본 포트
+        'NAME': 'company_db',
+        'USER': 'skdudgns@skdudgnsdb',
+        'PASSWORD': '9P@ssw0rd',
+        'HOST': 'skdudgnsdb.mysql.database.azure.com',
+        'PORT': '3306',
     }
 }
+
 
 
 
