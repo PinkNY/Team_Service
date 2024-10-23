@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'backend/**'  # backend 폴더 내 파일이 변경될 때만 트리거
-
   workflow_dispatch:
 
 jobs:
