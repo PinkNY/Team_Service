@@ -21,6 +21,14 @@ export const CardTitle = styled.h2`
   margin: 0;
 `;
 
+export const BottomRightText = styled.div`
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 10px;
+  color: white;
+`;
+
 export const CardContent = styled.div`
   padding: 1.5rem;
 `;
@@ -38,6 +46,23 @@ export const FestivalGrid = styled.div`
 `;
 
 export const FestivalCard = styled(Card)`
+  cursor: pointer;
+  
+  transition: box-shadow 0.2s;
+  &:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+`;
+
+export const MoreCard = styled(Card)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  font-weight: bold;
+  font-size: 20px;
+
   transition: box-shadow 0.2s;
   &:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);

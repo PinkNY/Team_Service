@@ -9,9 +9,17 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  color: white;
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  background-color: #3b82f6;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 `;
 
 export const Table = styled.table`
@@ -50,17 +58,16 @@ export const PageButton = styled.button`
 
 export const SearchContainer = styled.div`
   display: flex;
+  justify-content: center;
+  align-items:
+
   gap: 0.5rem;
   margin-top: 1rem;
 `;
 
-export const Select = styled.div`
-  padding: 0.5rem;
-  border: 3px solid #e2e8f0;
-`;
-
 export const Input = styled.input`
-  flex-grow: 1;
+  display: flex;
+  width: 35%;
   padding: 0.5rem;
   border: 3px solid #e2e8f0;
 `;
@@ -75,6 +82,14 @@ export const Button = styled.button`
   &:hover {
     background-color: #3182ce;
   }
+`;
+
+export const Select = styled.select`
+  padding: 10px;
+  border: 3px solid #e2e8f0;
+  background-color: white;
+  font-size: 16px;
+  outline: none;
 `;
 
 
