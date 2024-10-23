@@ -18,22 +18,23 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Activate existing virtual environment  # 기존의 'antenv' 가상환경을 활성화
+      - name: Create and start virtual environment  # 새로 가상환경을 생성
         run: |
-          source antenv/bin/activate
+          python -m venv venv  # venv 가상환경 생성
+          source venv/bin/activate  # venv 가상환경 활성화
 
       - name: Install dependencies
         run: |
-          source antenv/bin/activate
+          source venv/bin/activate  # venv 가상환경 활성화
           pip install -r backend/requirements.txt  # 의존성 설치
 
       - name: Run Django tests
         run: |
-          source antenv/bin/activate
+          source venv/bin/activate  # venv 가상환경 활성화
           python backend/manage.py test  # Django 테스트 실행
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip backend -x '*.git*' -x 'antenv/*'  # backend 폴더만 압축
+        run: zip -r release.zip backend -x '*.git*' -x 'venv/*'  # backend 폴더만 압축
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -68,17 +69,21 @@ jobs:
           app-name: 'teambackend'
           package: './backend'  # backend 폴더 배포
 
+      - name: Use antenv virtual environment  # 앱 서비스에서 자동으로 생성된 antenv 가상환경 사용
+        run: |
+          source antenv/bin/activate  # 앱 서비스의 antenv 가상환경 활성화
+
       - name: Make migrations  # Django 모델 변경 사항에 대한 마이그레이션 파일 생성
         run: |
-          source antenv/bin/activate  # 가상 환경 활성화
+          source antenv/bin/activate  # antenv 가상환경 활성화
           python backend/manage.py makemigrations
 
       - name: Run database migrations  # 생성된 마이그레이션 파일을 기반으로 DB에 적용
         run: |
-          source antenv/bin/activate  # 가상 환경 활성화
+          source antenv/bin/activate  # antenv 가상환경 활성화
           python backend/manage.py migrate
 
       - name: Collect static files
         run: |
-          source antenv/bin/activate  # 가상 환경 활성화
+          source antenv/bin/activate  # antenv 가상환경 활성화
           python backend/manage.py collectstatic --noinput  # 정적 파일 수집
