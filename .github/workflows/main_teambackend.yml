@@ -26,16 +26,16 @@ jobs:
       - name: Install dependencies
         run: |
           source venv/bin/activate
-          pip install -r backend/requirements.txt
+          pip install -r backend/requirements.txt  # 경로 수정
 
-      # Optional: Add step to run Django tests here
+      # Optional: Add step to run Django tests here (pytest, Django test suites, etc.)
       - name: Run Django tests
         run: |
           source venv/bin/activate
           python backend/manage.py test
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip backend -x '*.git*' -x 'venv/*'
+        run: zip -r release.zip backend -x '*.git*' -x 'venv/*'  # backend 폴더만 압축
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -63,16 +63,16 @@ jobs:
         run: unzip release.zip
 
       - name: Login to Azure
-        uses: azure/login@v1.5  # 최신 버전으로 업데이트
+        uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS_BACKEND }}
+          creds: ${{ secrets.AZURE_CREDENTIALS_BACKEND }}  # 백엔드용으로 생성된 Secret 사용
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'teambackend'  # Azure Portal에서 확인한 정확한 이름으로 설정
-          package: 'backend'
+          app-name: 'teambackend'
+          package: 'backend'  # 압축 해제된 backend 폴더를 배포
 
       - name: Run database migrations
         run: |
