@@ -1,0 +1,58 @@
+name: Azure Static Web Apps CI/CD
+
+on: # 워크플로가 실행되는 조건
+  push: # main 브랜치에 push가 발생할 때
+    branches:
+      - main
+  pull_request: # main 브랜치로의 pull request가 열리거나 동기화, 재오픈, 또는 닫힐 때
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+jobs:
+  build_and_deploy_job: # 빌드 및 배포 작업
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed') 
+    # push가 발생하거나 pull request가 열려 있을 때만 실행
+    runs-on: ubuntu-latest # 작업이 실행될 환경으로 Ubuntu 최신 버전 사용
+    name: Build and Deploy Job # 작업 이름
+    steps:
+      - uses: actions/checkout@v3 # GitHub 리포지토리에서 코드를 체크아웃(가져오기)하는 단계
+        with:
+          submodules: true # 서브모듈도 포함해서 가져오기
+          lfs: false # Git LFS(Large File Storage)를 사용하지 않음
+      
+      - name: Install dependencies # 필요한 의존성(npm 패키지) 설치
+        run: |
+          cd frontend
+          npm install
+      
+      - name: Build React app without stopping on warnings # 경고가 발생해도 빌드를 중단하지 않고 React 앱 빌드
+        run: |
+          cd frontend
+          CI=false npm run build
+
+      - name: Build And Deploy # 빌드 및 배포 단계
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1 # Azure Static Web App에 배포하는 GitHub Actions 사용
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API }} 
+          # Azure Static Web App에 연결하는 데 사용할 API 토큰 (GitHub Secrets에 저장된 값)
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # GitHub와의 통합(예: PR 댓글 등)에 사용하는 토큰
+          action: "upload" # 배포 동작을 수행
+          app_location: "./frontend" # 앱 소스 코드가 위치한 디렉토리
+          api_location: "" # API 소스 코드 경로 (이 프로젝트에서는 사용하지 않음)
+          output_location: "build" # 빌드된 결과물이 저장된 디렉토리
+
+  close_pull_request_job: # pull request가 닫혔을 때 실행되는 작업
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' 
+    # pull request가 닫혔을 때만 실행
+    runs-on: ubuntu-latest # 작업이 실행될 환경으로 Ubuntu 최신 버전 사용
+    name: Close Pull Request Job # 작업 이름
+    steps:
+      - name: Close Pull Request # pull request를 닫는 단계
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API }} 
+          # Azure Static Web App에 연결하는 데 사용할 API 토큰 (GitHub Secrets에 저장된 값)
+          action: "close" # pull request를 닫는 동작을 수행
