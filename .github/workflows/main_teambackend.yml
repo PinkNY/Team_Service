@@ -20,29 +20,28 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          python -m venv venv
-          source venv/bin/activate
+          python -m venv backend/venv  # backend 폴더 내부에 venv 생성
+          source backend/venv/bin/activate
 
       - name: Install dependencies
         run: |
-          source venv/bin/activate
+          source backend/venv/bin/activate
           pip install -r backend/requirements.txt  # 경로 수정
 
       # Optional: Add step to run Django tests here (pytest, Django test suites, etc.)
       - name: Run Django tests
         run: |
-          source venv/bin/activate
+          source backend/venv/bin/activate
           python backend/manage.py test
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip backend -x '*.git*' -x 'venv/*'  # backend 폴더만 압축
+        run: zip -r release.zip backend -x '*.git*' -x 'backend/venv/*'  # backend 폴더만 압축 (venv 제외)
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: django-app
-          path: |
-            release.zip
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -76,10 +75,8 @@ jobs:
 
       - name: Run database migrations
         run: |
-          source venv/bin/activate
-          python backend/manage.py migrate
+          python backend/manage.py migrate  # venv 경로 설정 불필요 (Azure 환경에서)
 
       - name: Collect static files
         run: |
-          source venv/bin/activate
-          python backend/manage.py collectstatic --noinput
+          python backend/manage.py collectstatic --noinput  # venv 경로 설정 불필요 (Azure 환경에서)
