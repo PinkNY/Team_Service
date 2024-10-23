@@ -5,12 +5,12 @@ on:
     branches:
       - main
     paths:
-      - 'backend/**'  # backend 디렉토리 내에서만 변경이 있을 때만 트리거
+      - 'backend/**'  # backend 디렉토리 안에서만 변경이 있을 때만 트리거
   pull_request:
     branches:
       - main
     paths:
-      - 'backend/**'  # pull request 시 backend 디렉토리 변경 시에만 트리거
+      - 'backend/**'
   workflow_dispatch:
 
 jobs:
@@ -27,19 +27,19 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          cd backend
-          python -m venv venv
+          cd backend  # backend 폴더로 이동
+          python -m venv venv  # venv 생성
           source venv/bin/activate
 
       - name: Install dependencies
         run: |
-          cd backend
+          cd backend  # 계속 backend 폴더 내에 머무르도록 수정
           source venv/bin/activate
           pip install -r requirements.txt
 
       - name: Run Django tests
         run: |
-          cd backend
+          cd backend  # 계속 backend 폴더 내에 머무르도록 수정
           source venv/bin/activate
           python manage.py test
 
@@ -84,10 +84,10 @@ jobs:
 
       - name: Run database migrations
         run: |
-          cd backend
+          cd backend  # backend 폴더로 이동 후 migrate 실행
           python manage.py migrate
 
       - name: Collect static files
         run: |
-          cd backend
+          cd backend  # backend 폴더로 이동 후 static files 수집
           python manage.py collectstatic --noinput
