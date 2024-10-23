@@ -6,14 +6,14 @@ from django.contrib.auth.models import AbstractUser
 
 class RegularUser(AbstractUser):  # 일반 사용자 모델
     name = models.CharField(max_length=100)
-    birthdate = models.DateField(null=True, blank=True)
-    region = models.CharField(max_length=100)
+    birth_date = models.DateField(null=True, blank=True)
+    location = models.CharField(max_length=100)
     # 성별 선택지
     gender = models.CharField(
-        max_length=1,
+        max_length=2,
         choices=[
-            ('M', '남성'),
-            ('F', '여성')
+            ('남자', '남자'),
+            ('여자', '여자')
         ],
         default='M'
     )
@@ -38,7 +38,7 @@ class RegularUser(AbstractUser):  # 일반 사용자 모델
 class BusinessUser(AbstractUser):  # 사업자 사용자 모델
     company_name = models.CharField(max_length=255)
     business_number = models.CharField(max_length=20, unique=True)
-    region = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
 
     # groups 필드에 related_name 추가
     groups = models.ManyToManyField(
