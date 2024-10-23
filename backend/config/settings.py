@@ -85,22 +85,8 @@ AUTH_USER_MODEL = 'api.RegularUser'
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'user_db',      # 데이터베이스 이름
-#         'USER': 'root',      # 데이터베이스 사용자 이름
-#         'PASSWORD': '1234',       # 사용자 비밀번호
-#         'HOST': '192.168.0.79',               # 데이터베이스 서버의 호스트
-#         'PORT': '3306',                    # MySQL 포트 (기본값은 3306)
-#     }
-# }
-
 DATABASES = {
-    'default': {
+    'default_azure': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'default_festa',  # Azure에 있는 DB 이름
         'USER': 'skdudgns@skdudgnsdb',  # 사용자명@서버명
@@ -108,7 +94,7 @@ DATABASES = {
         'HOST': 'skdudgnsdb.mysql.database.azure.com',  # Azure MySQL 호스트
         'PORT': '3306',
     },
-    'user_db': {
+    'user_db_azure': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'user_db',
         'USER': 'skdudgns@skdudgnsdb',
@@ -116,16 +102,41 @@ DATABASES = {
         'HOST': 'skdudgnsdb.mysql.database.azure.com',
         'PORT': '3306',
     },
-    'company_db': {
+    'company_db_azure': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'company_db',
         'USER': 'skdudgns@skdudgnsdb',
         'PASSWORD': '9P@ssw0rd',
         'HOST': 'skdudgnsdb.mysql.database.azure.com',
         'PORT': '3306',
+    },
+    'default_dev': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'default_festa',  # 개발 서버에 있는 DB 이름
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': '192.168.0.79',  # 개발 서버 IP 주소
+        'PORT': '3306',
+    },
+    'user_db_dev': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'user_db',
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': '192.168.0.79',
+        'PORT': '3306',
+    },
+    'company_db_dev': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'company_db',
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': '192.168.0.79',
+        'PORT': '3306',
     }
 }
 
+DATABASE_ROUTERS = ['backend.routers.db_router.DevAzureRouter']
 
 
 
