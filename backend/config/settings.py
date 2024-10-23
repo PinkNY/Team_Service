@@ -90,31 +90,39 @@ import os
 if os.getenv('ENVIRONMENT') == 'PRODUCTION':
     # 배포 환경일 때 기본 데이터베이스를 Azure로 설정
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'default_festa',  # Azure에 있는 DB 이름
-            'USER': 'skdudgns@skdudgnsdb',  # 사용자명@서버명
-            'PASSWORD': '9P@ssw0rd',  # MySQL 비밀번호
-            'HOST': 'skdudgnsdb.mysql.database.azure.com',  # Azure MySQL 호스트
-            'PORT': '3306',
-        },
-        'user_db': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'user_db',
-            'USER': 'skdudgns@skdudgnsdb',
-            'PASSWORD': '9P@ssw0rd',
-            'HOST': 'skdudgnsdb.mysql.database.azure.com',
-            'PORT': '3306',
-        },
-        'company_db': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'company_db',
-            'USER': 'skdudgns@skdudgnsdb',
-            'PASSWORD': '9P@ssw0rd',
-            'HOST': 'skdudgnsdb.mysql.database.azure.com',
-            'PORT': '3306',
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'default_festa',  # Azure에 있는 DB 이름
+        'USER': 'skdudgns@teamdatabase',  # 사용자명@서버명
+        'PASSWORD': '9P@ssw0rd',  # MySQL 비밀번호
+        'HOST': 'teamdatabase.mysql.database.azure.com',  # Azure MySQL 호스트
+        'PORT': '3306',
+    },
+    'user_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'user_db',
+        'USER': 'skdudgns@teamdatabase',
+        'PASSWORD': '9P@ssw0rd',
+        'HOST': 'teamdatabase.mysql.database.azure.com',
+        'PORT': '3306',
+    },
+    'company_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'company_db',
+        'USER': 'skdudgns@teamdatabase',
+        'PASSWORD': '9P@ssw0rd',
+        'HOST': 'teamdatabase.mysql.database.azure.com',
+        'PORT': '3306',
+    },
+    'festival': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'festival',
+        'USER': 'skdudgns@teamdatabase',
+        'PASSWORD': '9P@ssw0rd',
+        'HOST': 'teamdatabase.mysql.database.azure.com',
+        'PORT': '3306',
     }
+}
 else:
     # 개발 환경일 때 기본 데이터베이스를 개발 서버로 설정
     DATABASES = {
@@ -137,6 +145,14 @@ else:
         'company_db': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'company_db',
+            'USER': 'root',
+            'PASSWORD': '1234',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        },
+        'festival': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'festival',
             'USER': 'root',
             'PASSWORD': '1234',
             'HOST': 'localhost',
