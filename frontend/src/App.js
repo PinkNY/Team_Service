@@ -6,6 +6,8 @@ import Navbar from './pages/components/Nav';
 import LoginPage from "./pages/components/Login";
 import SignUp from "./pages/components/Signup";
 import NoticeBoard from "./pages/components/NoticeBoard";
+import NoticeDetail from "./pages/components/NoticeDetail";
+import FestivalList from './pages/components/List';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/notice' element={<NoticeBoard />} />
+        <Route path='/notice-detail' element={<NoticeDetail />} />
+        <Route path="/list" element={<FestivalList />} />
       </Routes>
     </Router>
   );

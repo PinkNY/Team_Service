@@ -146,7 +146,7 @@ export const SendWindow = styled.div`
 export const HalfBox = styled.div`
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 30px;
 
   ${media.mobile} {
     flex-direction: column;

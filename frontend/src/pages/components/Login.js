@@ -20,7 +20,7 @@ const LoginPage = () => {
     e.preventDefault();
     setErrorMessage('');
     try {
-      const response = await axios.post('/api/login', {
+      const response = await axios.post('backendtest-d8g0eqczavdveda7.koreacentral-01.azurewebsites.net/api/login/user', {
         username, password,
       });
 
