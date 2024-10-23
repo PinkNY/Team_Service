@@ -5,7 +5,12 @@ on:
     branches:
       - main
     paths:
-      - 'backend/**'  # backend 디렉토리 안에서만 변경이 있을 때만 트리거
+      - 'backend/**'  # backend 디렉토리 내에서만 변경이 있을 때만 트리거
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'backend/**'  # pull request 시 backend 디렉토리 변경 시에만 트리거
   workflow_dispatch:
 
 jobs:
@@ -22,18 +27,21 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          python -m venv backend/venv  # backend 폴더 내부에 venv 생성
-          source backend/venv/bin/activate
+          cd backend
+          python -m venv venv
+          source venv/bin/activate
 
       - name: Install dependencies
         run: |
-          source backend/venv/bin/activate
-          pip install -r backend/requirements.txt
+          cd backend
+          source venv/bin/activate
+          pip install -r requirements.txt
 
       - name: Run Django tests
         run: |
-          source backend/venv/bin/activate
-          python backend/manage.py test
+          cd backend
+          source venv/bin/activate
+          python manage.py test
 
       - name: Zip artifact for deployment
         run: zip -r release.zip backend -x '*.git*' -x 'backend/venv/*'
@@ -71,12 +79,15 @@ jobs:
 
       - name: Install dependencies on Azure
         run: |
-          pip install -r backend/requirements.txt
+          cd backend
+          pip install -r requirements.txt
 
       - name: Run database migrations
         run: |
-          python backend/manage.py migrate
+          cd backend
+          python manage.py migrate
 
       - name: Collect static files
         run: |
-          python backend/manage.py collectstatic --noinput
+          cd backend
+          python manage.py collectstatic --noinput
